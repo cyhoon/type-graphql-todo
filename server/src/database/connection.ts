@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 const mongodbURL = 'mongodb://localhost:27017/type-graphql-todo';
 
 async function connectMongoDB() {
-  console.log('Connecting mongodb connection');
+  console.log('Connecting mongodb');
 
   try {
     await mongoose.connect(mongodbURL, { useNewUrlParser: true });

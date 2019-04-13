@@ -1,6 +1,6 @@
 import { Todo } from './todo.type';
 import { Resolver, Query, Mutation, Arg } from 'type-graphql';
-import { NewPost } from './todo.input';
+import { TodoArgs } from './todo.input';
 
 @Resolver()
 export class TodoResolver {
@@ -20,10 +20,20 @@ export class TodoResolver {
   }
 
   @Mutation(() => Todo)
-  public createTodo(@Arg('newPost') newPost: NewPost) {
-    const { content } = newPost;
+  public createTodo(@Arg('todo') todo: TodoArgs) {
+    const { content } = todo;
 
-    this.todos.push(newPost);
+    this.todos.push(todo);
     return { content };
+  }
+
+  @Mutation(() => Todo)
+  public updateTodo(@Arg('todo') todo: TodoArgs) {
+    return this.todos[0];
+  }
+
+  @Mutation(() => Boolean)
+  public deleteTodo(@Arg('postId') postId: string) {
+    return true;
   }
 }

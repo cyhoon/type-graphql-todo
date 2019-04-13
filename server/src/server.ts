@@ -4,17 +4,39 @@ import * as Koa from 'koa';
 import { ApolloServer } from 'apollo-server-koa';
 import { buildSchemaSync } from 'type-graphql';
 import { TodoResolver } from './graphql/todo/todo.resolver';
+import connectMongoDB from './database/connection';
 
 const schema = buildSchemaSync({
   resolvers: [TodoResolver],
   validate: false
 });
 
-const app = new Koa();
+class Server {
+  private app: Koa;
+  private apolloServer: ApolloServer;
 
-const apolloServer = new ApolloServer({ schema });
-apolloServer.applyMiddleware({ app });
+  constructor() {
+    this.app = new Koa();
+    this.apolloServer = new ApolloServer({ schema });
 
-app.listen(3000, () => {
-  console.log('Server is listenning to port 3000');
-});
+    this.setApolloServer();
+  }
+
+  private setApolloServer() {
+    this.apolloServer.applyMiddleware({ app: this.app });
+  }
+
+  private async connectDatabase() {
+    await connectMongoDB();
+  }
+
+  public async runServer() {
+    await this.connectDatabase();
+
+    this.app.listen(3000, () => {
+      console.log('Server is running to http://localhost:3000');
+    });
+  }
+}
+
+export default Server;

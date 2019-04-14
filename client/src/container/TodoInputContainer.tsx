@@ -56,7 +56,7 @@ const TodoInputContainer = () => {
 
     const todosCache = cache.readQuery<Todos>({ query: TODOS });
 
-    todosCache.toods.push(createTodo);
+    todosCache.toods.unshift(createTodo);
 
     cache.writeQuery({
       query: TODOS,

@@ -7,7 +7,7 @@ import { Todo } from '../graphql/todo/todo.type';
 @Service()
 export default class TodoService {
   async getTodos(): Promise<Todo[]> {
-    return TodoModel.find();
+    return TodoModel.find().sort({ _id: 'DESC' });
   }
 
   async createTodo(newTodo: NewTodo) {

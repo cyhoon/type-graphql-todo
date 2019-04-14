@@ -1,39 +1,35 @@
-import { Todo } from './todo.type';
 import { Resolver, Query, Mutation, Arg } from 'type-graphql';
-import { TodoArgs } from './todo.input';
+import { Service } from 'typedi';
+import { Todo, DelectionTodo } from './todo.type';
+import { NewTodo, NextTodo } from './todo.input';
+import TodoService from '../../service/todo.service';
 
-@Resolver()
+@Resolver(of => Todo)
+@Service()
 export class TodoResolver {
-  private todos: Todo[];
-
-  constructor() {
-    this.todos = [
-      {
-        content: 'First'
-      }
-    ];
-  }
+  constructor(private todoService: TodoService) {}
 
   @Query(() => [Todo])
   public toods() {
-    return this.todos;
+    return this.todoService.getTodos();
   }
 
   @Mutation(() => Todo)
-  public createTodo(@Arg('todo') todo: TodoArgs) {
-    const { content } = todo;
-
-    this.todos.push(todo);
-    return { content };
+  public createTodo(@Arg('todo') todo: NewTodo) {
+    return this.todoService.createTodo(todo);
   }
 
   @Mutation(() => Todo)
-  public updateTodo(@Arg('todo') todo: TodoArgs) {
-    return this.todos[0];
+  public updateTodo(@Arg('todo') todo: NextTodo) {
+    return this.todoService.updateTodo(todo);
   }
 
-  @Mutation(() => Boolean)
-  public deleteTodo(@Arg('postId') postId: string) {
-    return true;
+  @Mutation(() => DelectionTodo)
+  public async deleteTodo(@Arg('todoId') todoId: string) {
+    const isDelete = await this.todoService.deleteTodo(todoId);
+
+    return {
+      isDelete
+    };
   }
 }

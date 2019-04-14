@@ -2,14 +2,8 @@ import 'reflect-metadata';
 
 import * as Koa from 'koa';
 import { ApolloServer } from 'apollo-server-koa';
-import { buildSchemaSync } from 'type-graphql';
-import { TodoResolver } from './graphql/todo/todo.resolver';
 import connectMongoDB from './database/connection';
-
-const schema = buildSchemaSync({
-  resolvers: [TodoResolver],
-  validate: false
-});
+import { graphqlSchema } from './graphql';
 
 class Server {
   private app: Koa;
@@ -17,7 +11,7 @@ class Server {
 
   constructor() {
     this.app = new Koa();
-    this.apolloServer = new ApolloServer({ schema });
+    this.apolloServer = new ApolloServer({ schema: graphqlSchema });
 
     this.setApolloServer();
   }

@@ -1,10 +1,17 @@
 import * as React from "react";
 import styled from "styled-components";
+import { TodoDetail } from "../../graphqls/schema";
 
-const Todo = () => {
+interface Props {
+  todo: TodoDetail;
+}
+
+const Todo: React.SFC<Props> = ({ todo }) => {
+  const { content } = todo;
+
   return (
     <Wrap>
-      <span className="content">내용</span>
+      <span className="content">{content}</span>
     </Wrap>
   );
 };

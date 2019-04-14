@@ -5,12 +5,14 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.dev.config --hot",
-    "build": "webpack --config ./config/webpack.prod.config"
+    "build": "webpack --config ./config/webpack.prod.config",
+    "codegen:local": "apollo client:codegen ./src/graphqls/schema.ts --endpoint=http://localhost:3000/graphql --target=typescript --outputFlat --no-addTypename"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
+    "@types/graphql": "^14.2.0",
     "@types/react": "^16.8.13",
     "@types/react-dom": "^16.8.4",
     "@types/react-router-dom": "^4.3.2",
@@ -28,7 +30,13 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
+    "apollo": "^2.8.3",
+    "apollo-boost": "^0.3.1",
+    "apollo-codegen": "^0.20.2",
+    "graphql": "^14.2.1",
+    "graphql-tag": "^2.10.1",
     "react": "^16.8.6",
+    "react-apollo": "^2.5.4",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "styled-components": "^4.2.0"

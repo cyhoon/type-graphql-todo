@@ -1,11 +1,17 @@
 import * as React from "react";
 import styled from "styled-components";
 
-const InputLabel = () => {
+interface Props {
+  value: string;
+  handleChange: (event: React.FormEvent<HTMLInputElement>) => void;
+  handleClick: () => void;
+}
+
+const InputLabel: React.SFC<Props> = ({ value, handleChange, handleClick }) => {
   return (
     <Wrap>
-      <input type="text" />
-      <button>등록</button>
+      <input type="text" value={value} onChange={handleChange} />
+      <button onClick={handleClick}>등록</button>
     </Wrap>
   );
 };

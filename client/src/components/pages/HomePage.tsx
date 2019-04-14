@@ -2,7 +2,8 @@ import * as React from "react";
 import styled from "styled-components";
 import Header from "../common/header/Header";
 import InputLabel from "../common/inputLabel";
-import { TodoList } from "../todo";
+import TodoListContainer from "../../container/TodoListContainer";
+import TodoInputContainer from "../../container/TodoInputContainer";
 
 const HomePage: React.SFC<{}> = () => {
   return (
@@ -12,10 +13,10 @@ const HomePage: React.SFC<{}> = () => {
       </div>
       <div className="content">
         <div className="todo-input-wrap">
-          <InputLabel />
+          <TodoInputContainer />
         </div>
         <div className="todo-list-wrap">
-          <TodoList />
+          <TodoListContainer />
         </div>
       </div>
     </Container>

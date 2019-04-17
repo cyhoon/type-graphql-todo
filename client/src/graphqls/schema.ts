@@ -24,6 +24,47 @@ export interface CreateTodoVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: DeleteTodo
+// ====================================================
+
+export interface DeleteTodo_deleteTodo {
+  isDelete: boolean;
+}
+
+export interface DeleteTodo {
+  deleteTodo: DeleteTodo_deleteTodo;
+}
+
+export interface DeleteTodoVariables {
+  todoId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UpdateTodo
+// ====================================================
+
+export interface UpdateTodo_updateTodo {
+  _id: string;
+  content: string;
+}
+
+export interface UpdateTodo {
+  updateTodo: UpdateTodo_updateTodo;
+}
+
+export interface UpdateTodoVariables {
+  todo: NextTodo;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Todos
 // ====================================================
 
@@ -59,6 +100,11 @@ export interface TodoDetail {
 
 export interface NewTodo {
   _id?: string | null;
+  content: string;
+}
+
+export interface NextTodo {
+  _id: string;
   content: string;
 }
 

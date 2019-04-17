@@ -48,7 +48,7 @@ const TodoInputContainer = () => {
     cache: DataProxy,
     { data }: FetchResult<CreateTodo, Record<string, any>>
   ) => {
-    if (!(data && data.createTodo)) {
+    if (!data || !data.createTodo) {
       return;
     }
 

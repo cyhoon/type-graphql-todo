@@ -1,59 +1,27 @@
 import * as React from "react";
-import styled from "styled-components";
 import { TodoDetail } from "../../graphqls/schema";
-import TodoDeleteContainer from "../../container/TodoDeleteContainer";
+import TodoUpdateContainer from "../../container/TodoUpdateContainer";
+import ViewTodo from "./ViewTodo";
 
 interface Props {
   todo: TodoDetail;
 }
 
 const Todo: React.SFC<Props> = ({ todo }) => {
-  const { content } = todo;
+  const [isTodoUpdating, setTodoUpdate] = React.useState(false);
 
-  return (
-    <Container>
-      <span className="content">{content}</span>
-      <div className="options">
-        <div className="option-wrap">수정</div>
-        <span className="line">|</span>
-        <div className="option-wrap">
-          <TodoDeleteContainer todoId={todo._id} />
-        </div>
-      </div>
-    </Container>
+  const handleChangeTodoUpdate = () => {
+    setTodoUpdate(!isTodoUpdating);
+  };
+
+  return isTodoUpdating ? (
+    <TodoUpdateContainer
+      todo={todo}
+      onChangeTodoUpdate={handleChangeTodoUpdate}
+    />
+  ) : (
+    <ViewTodo todo={todo} onChangeTodoUpdate={handleChangeTodoUpdate} />
   );
 };
-
-const Container = styled.div`
-  height: 40px;
-  border: 1px solid #222;
-  margin-bottom: 15px;
-  border-radius: 4px;
-  padding: 8px 6px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: white;
-
-  .content {
-  }
-
-  .options {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    font-size: 12px;
-    font-weight: lighter;
-
-    .option-wrap {
-      cursor: pointer;
-    }
-
-    .line {
-      margin: 0 5px;
-    }
-  }
-`;
 
 export default Todo;

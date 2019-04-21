@@ -34,7 +34,6 @@ const TodoDeleteContainer: React.SFC<Props> = ({ todoId }) => {
   ) => async () => {
     try {
       await mutateDeleteTodo(mutate);
-      console.log("handleClickDeleteButton");
     } catch (error) {
       alert("삭제 실패");
     }

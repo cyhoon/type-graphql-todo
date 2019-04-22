@@ -5,8 +5,8 @@ import { Todos } from "../../schema";
 
 export const TODOS = gql`
   ${TodoDetailFragment}
-  query Todos {
-    toods {
+  query Todos($offset: Int!, $limit: Int!) {
+    todos(offset: $offset, limit: $limit) {
       ...TodoDetail
     }
   }

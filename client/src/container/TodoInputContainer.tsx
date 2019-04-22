@@ -6,7 +6,12 @@ import {
 } from "../graphqls/Todo/mutations/CreateTodo";
 import InputLabel from "../components/common/inputLabel";
 import { MutationFn, MutationUpdaterFn, FetchResult } from "react-apollo";
-import { CreateTodo, CreateTodoVariables, Todos } from "../graphqls/schema";
+import {
+  CreateTodo,
+  CreateTodoVariables,
+  Todos,
+  TodosVariables
+} from "../graphqls/schema";
 import { DataProxy } from "apollo-cache";
 import { TODOS } from "../graphqls/Todo/queries/todos";
 
@@ -54,12 +59,22 @@ const TodoInputContainer = () => {
 
     const { createTodo } = data;
 
-    const todosCache = cache.readQuery<Todos>({ query: TODOS });
+    const todosCache = cache.readQuery<Todos, TodosVariables>({
+      query: TODOS,
+      variables: {
+        limit: 10,
+        offset: 0
+      }
+    });
 
-    todosCache.toods.unshift(createTodo);
+    todosCache.todos.unshift(createTodo);
 
     cache.writeQuery({
       query: TODOS,
+      variables: {
+        limit: 10,
+        offset: 0
+      },
       data: todosCache
     });
   };

@@ -72,7 +72,7 @@ const TodoUpdateContainer: React.SFC<Props> = ({
 
     const todosCache = cache.readQuery<Todos>({ query: TODOS });
 
-    const foundTodosIndex = todosCache.toods.findIndex(
+    const foundTodosIndex = todosCache.todos.findIndex(
       todo => todo._id === _id
     );
 
@@ -81,7 +81,7 @@ const TodoUpdateContainer: React.SFC<Props> = ({
       return;
     }
 
-    todosCache.toods[foundTodosIndex].content = content;
+    todosCache.todos[foundTodosIndex].content = content;
 
     cache.writeQuery({
       query: TODOS,

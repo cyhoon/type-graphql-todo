@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Arg } from 'type-graphql';
+import { Resolver, Query, Mutation, Arg, Int } from 'type-graphql';
 import { Service } from 'typedi';
 import { Todo, DelectionTodo } from './todo.type';
 import { NewTodo, NextTodo } from './todo.input';
@@ -10,8 +10,11 @@ export class TodoResolver {
   constructor(private todoService: TodoService) {}
 
   @Query(() => [Todo])
-  public toods() {
-    return this.todoService.getTodos();
+  public todos(
+    @Arg('limit', type => Int, { nullable: true }) limit?: number,
+    @Arg('offset', type => Int, { nullable: true }) offset?: number
+  ) {
+    return this.todoService.getTodos(limit, offset);
   }
 
   @Mutation(() => Todo)

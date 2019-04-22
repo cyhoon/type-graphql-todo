@@ -6,8 +6,12 @@ import { Todo } from '../graphql/todo/todo.type';
 
 @Service()
 export default class TodoService {
-  async getTodos(): Promise<Todo[]> {
-    return TodoModel.find().sort({ _id: 'DESC' });
+  async getTodos(limit?: number, offset?: number): Promise<Todo[]> {
+    // return TodoModel.find().sort({ _id: 'DESC' });
+    return TodoModel.find()
+      .sort({ _id: 'DESC' })
+      .skip(offset || 0)
+      .limit(limit || 10);
   }
 
   async createTodo(newTodo: NewTodo) {

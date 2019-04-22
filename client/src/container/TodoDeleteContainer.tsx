@@ -57,9 +57,9 @@ const TodoDeleteContainer: React.SFC<Props> = ({ todoId }) => {
     }
 
     const todosCache = cache.readQuery<Todos>({ query: TODOS });
-    const nextTodos = todosCache.toods.filter(todo => todo._id !== todoId);
+    const nextTodos = todosCache.todos.filter(todo => todo._id !== todoId);
 
-    todosCache.toods = nextTodos;
+    todosCache.todos = nextTodos;
 
     cache.writeQuery({
       query: TODOS,

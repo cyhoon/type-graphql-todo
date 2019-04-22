@@ -6,7 +6,7 @@ import { Todos } from "../../schema";
 export const TODOS = gql`
   ${TodoDetailFragment}
   query Todos {
-    toods {
+    todos {
       ...TodoDetail
     }
   }

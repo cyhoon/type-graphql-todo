@@ -10,7 +10,7 @@ export class TodoResolver {
   constructor(private todoService: TodoService) {}
 
   @Query(() => [Todo])
-  public toods() {
+  public todos() {
     return this.todoService.getTodos();
   }
 

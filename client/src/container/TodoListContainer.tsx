@@ -14,7 +14,7 @@ const TodoListContainer = () => {
           return <h3>LOADING</h3>;
         }
 
-        return <TodoList todos={data.toods} />;
+        return <TodoList todos={data.todos} />;
       }}
     </TodoListQuery>
   );

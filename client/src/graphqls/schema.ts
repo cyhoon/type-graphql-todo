@@ -68,13 +68,13 @@ export interface UpdateTodoVariables {
 // GraphQL query operation: Todos
 // ====================================================
 
-export interface Todos_toods {
+export interface Todos_todos {
   _id: string;
   content: string;
 }
 
 export interface Todos {
-  toods: Todos_toods[];
+  todos: Todos_todos[];
 }
 
 /* tslint:disable */
